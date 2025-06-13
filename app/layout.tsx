@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Image className='bg' src="/portbg.jpg" alt="logo" width={600} height={600} />
+        <img className='bg' src="/portbg.jpg" alt="logo" />
         {children}
       </body>
     </html>
