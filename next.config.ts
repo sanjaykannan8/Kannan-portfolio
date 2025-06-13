@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
   basePath: '/Kannan-portfolio',
+  assetPrefix: `/Kannan-portfolio/`
   images: {
     unoptimized: true,
   },
