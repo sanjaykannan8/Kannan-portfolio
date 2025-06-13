@@ -50,9 +50,7 @@ export default function Home() {
         output = "check out his github guys";
         break;
       case "cat about.txt":
-        output = "Hello! I'm Kannan K, a passionate tech enthusiast with a keen interest in cybersecurity and artificial intelligence.\n As a self-made programmer, I thrive on mastering new skills and taking on challenges that push my boundaries.\n My journey so far has been a blend of hands-on projects, continuous learning, and staying updated with the latest trends in technology
-
-";
+        output = "Hello! I'm Kannan K, a passionate tech enthusiast with a keen interest in cybersecurity and artificial intelligence.\n As a self-made programmer, I thrive on mastering new skills and taking on challenges that push my boundaries.\n My journey so far has been a blend of hands-on projects, continuous learning, and staying updated with the latest trends in technology";
         break;
       case "cat flag.txt":
         if(flag){
