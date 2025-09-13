@@ -35,13 +35,13 @@ export default function Home() {
      <div className={styles.root}>
        <div className={styles.top}>
          <span className={styles.top_left}>
-          <span><img src="/kali.svg" alt="logo" /></span>
+          <span><img src="/Kannan-portfolio/kali.svg" alt="logo" /></span>
           <span className={styles.port}>Welcome to Kannan's Portfolio</span>
          </span>
          <span className={styles.top_right}>
-         <span><img src="/wifi.svg" alt="logo" /></span>
-         <span><img src="/ble.svg" alt="logo" /></span>
-         <span><img src="/battery.svg" alt="logo" /></span>
+         <span><img src="/Kannan-portfolio/wifi.svg" alt="logo" /></span>
+         <span><img src="/Kannan-portfolio/ble.svg" alt="logo" /></span>
+         <span><img src="/Kannan-portfolio/battery.svg" alt="logo" /></span>
 
           <div className={styles.top_right_time}
           style={{display: "flex", flexDirection: "column", alignItems: "flex-end", justifyContent: "flex-end", width: "auto", gap: "2px"}}
@@ -53,15 +53,15 @@ export default function Home() {
          </span>
        </div>
        <div className={styles.navbar}>
-       <span onClick={() => setShowTerminal(true)} style={{ cursor: 'pointer' }}><img src="/terminal.svg" alt="logo" /></span>
-       <span onClick={() => setShowChrome(true)} style={{ cursor: 'pointer' }}><img src="/chrome.svg" alt="logo" /></span>
-       <span onClick={() => window.open("https://github.com/sanjaykannan8", "_blank")} style={{ cursor: 'pointer' }}><img src="/github.svg" alt="logo" /></span>
-       <span onClick={() => window.open("https://www.linkedin.com/in/kannan-in/", "_blank")} style={{ cursor: 'pointer' }}><img src="/linkedin.svg" alt="logo" /></span>
-       <span onClick={() => window.open("https://open.spotify.com/", "_blank")} style={{ cursor: 'pointer' }}><img src="/spotify.svg" alt="logo" /></span>
-       <span onClick={() => setShowNotepad(true)} style={{ cursor: 'pointer' }}><img src="/notepad.svg" alt="logo" /></span>
-       <span><img src="/vsc.svg" alt="logo" /></span>
-       <span><img src="/folder.svg" alt="logo" /></span>
-       <span><img src="/trash.svg" alt="logo" /></span>
+       <span onClick={() => setShowTerminal(true)} style={{ cursor: 'pointer' }}><img src="/Kannan-portfolio/terminal.svg" alt="logo" /></span>
+       <span onClick={() => setShowChrome(true)} style={{ cursor: 'pointer' }}><img src="/Kannan-portfolio/chrome.svg" alt="logo" /></span>
+       <span onClick={() => window.open("https://github.com/sanjaykannan8", "_blank")} style={{ cursor: 'pointer' }}><img src="/Kannan-portfolio/github.svg" alt="logo" /></span>
+       <span onClick={() => window.open("https://www.linkedin.com/in/kannan-in/", "_blank")} style={{ cursor: 'pointer' }}><img src="/Kannan-portfolio/linkedin.svg" alt="logo" /></span>
+       <span onClick={() => window.open("https://open.spotify.com/", "_blank")} style={{ cursor: 'pointer' }}><img src="/Kannan-portfolio/spotify.svg" alt="logo" /></span>
+       <span onClick={() => setShowNotepad(true)} style={{ cursor: 'pointer' }}><img src="/Kannan-portfolio/notepad.svg" alt="logo" /></span>
+       <span><img src="/Kannan-portfolio/vsc.svg" alt="logo" /></span>
+       <span><img src="/Kannan-portfolio/folder.svg" alt="logo" /></span>
+       <span><img src="/Kannan-portfolio/trash.svg" alt="logo" /></span>
        </div>
        {showTerminal && <Terminal isVisible={showTerminal} onClose={() => setShowTerminal(false)} />}
        {showNotepad && <Notepad isVisible={showNotepad} onClose={() => setShowNotepad(false)} />}
