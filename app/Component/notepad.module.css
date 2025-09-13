@@ -1,0 +1,123 @@
+.notepad_container_outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.notepad_wrapper {
+    position: absolute;
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.notepad_container {
+    width: 500px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.notepad_header {
+    background-color: #f0f0f0;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    cursor: grab;
+}
+
+.notepad_header:active {
+    cursor: grabbing;
+}
+
+.window_controls {
+    display: flex;
+    gap: 8px;
+    margin-right: 15px;
+}
+
+.control_button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.control_button:hover {
+    transform: scale(1.1);
+}
+
+.close_button {
+    background-color: #ff5f57;
+}
+
+.minimize_button {
+    background-color: #febc2e;
+}
+
+.notepad_title {
+    font-size: 14px;
+    color: #333;
+    margin-left: 5px;
+}
+
+.notepad_content {
+    padding: 15px;
+    height: 400px;
+    background-color: #fff;
+}
+
+.notepad_textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background: transparent;
+    padding: 0;
+}
+
+.notepad_textarea::placeholder {
+    color: #999;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+.closing {
+    animation: slideOut 0.3s ease forwards;
+}

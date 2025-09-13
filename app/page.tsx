@@ -1,173 +1,71 @@
-"use client";
-import { useState } from "react";
+"use client"
 import styles from "./page.module.css";
+import { useState, useEffect } from 'react';
 import Terminal from "./Component/terminal";
+import Notepad from "./Component/notepad";
+import Chrome from "./Component/chrome";  
 
 export default function Home() {
-  const [Pressed, setPressed] = useState(false);
-  const [cmd, setCmd] = useState("");
-  const [render, setRender] = useState(0);
-  const [terminalHistory, setTerminalHistory] = useState<Array<{command: string, output: string}>>([]);
-  const [flag, setFlag] = useState(false);
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      hour12: false 
-    });
-  };
+  const [time, setTime] = useState('');
+  const [date, setDate] = useState('');
+  const [showTerminal, setShowTerminal] = useState(false);
+  const [showNotepad, setShowNotepad] = useState(false);
+  const [showChrome, setShowChrome] = useState(false);
+  useEffect(() => {
+    const updateDateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      }));
+      setDate(now.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }));
+    };
 
-  const getCurrentDate = () => {
-    return new Date().toLocaleDateString('en-US', { 
-      weekday: 'short', 
-      month: 'short', 
-      day: 'numeric' 
-    });
-  };
+    updateDateTime();
+    const interval = setInterval(updateDateTime, 1000);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCmd(e.target.value);
-  }
-  const processCommand = (command: string) => {
-    let output = "";
-    
-    switch(command.toLowerCase().trim()) {
-      case "help":
-        output = `Available commands:
-- help: Show this help message
-- ls: list files in this directory
-- cat: display the contents of a file
-- clear: Clear terminal
-- exit: Exit the terminal`;
-        break;
-      case "ls":
-        output = "projects.txt \t about.txt \t flag.txt";
-        break;
-      case "cat":
-        output = "Specify the file name to display the contents";
-        break;
-      case "cat projects.txt":
-        output = "check out his github guys";
-        break;
-      case "cat about.txt":
-        output = "he is a student of computer science and engineering";
-        break;
-      case "cat flag.txt":
-        if(flag){
-          output = "flag{this_is_a_flag}";
-        }
-        else{
-          output = "you need to find a hidden button to get the flag";
-        }
-        break;
-      case "exit":
-        setTerminalHistory([]);
-        setPressed(false);
-        setCmd("");
-        break;
-      case "clear":
-        setTerminalHistory([]);
-        setCmd("");
-        return;
-      default:
-        output = `Command '${command}' not found. Type 'help' for available commands.`;
-    }
-    
-    setTerminalHistory(prev => [...prev, { command, output }]);
-    setCmd("");
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && cmd.trim()) {
-      processCommand(cmd);
-    }
-  };
+    return () => clearInterval(interval);
+  }, []);
   return (
-    <div className={styles.root}>
-      <div className={styles.taskbar}>
-        <div className={styles.taskbar_left}>
-          <div className={styles.system_logo}>🐧 Ubuntu</div>
-          <span className={styles.taskbar_item} onClick={() => setPressed(!Pressed)}>Terminal</span>
-        
-        </div>
+     <div className={styles.root}>
+       <div className={styles.top}>
+         <span className={styles.top_left}>
+          <span><img src="/kali.svg" alt="logo" /></span>
+          <span className={styles.port}>Welcome to Kannan's Portfolio</span>
+         </span>
+         <span className={styles.top_right}>
+         <span><img src="/wifi.svg" alt="logo" /></span>
+         <span><img src="/ble.svg" alt="logo" /></span>
+         <span><img src="/battery.svg" alt="logo" /></span>
 
-        
-        <div className={styles.taskbar_center}>
-          <span className={styles.taskbar_item}>Welcome to Kannan's old PC - search it for his details</span>
-        </div>
-
-        
-        <div className={styles.taskbar_right}>
-          <div className={styles.system_indicator}>
-            <span className={styles.network_status}>📶</span>
-            <span>WiFi</span>
-          </div>
-          <div className={styles.system_indicator}>
-            <span className={styles.battery_status}>🔋</span>
-            <span>85%</span>
-          </div>
-          <div className={styles.system_indicator}>
-            <span>🔊</span>
-          </div>
-          <div className={styles.time_display}>
-            <div>{getCurrentTime()}</div>
-            <div style={{fontSize: '11px', opacity: 0.8}}>{getCurrentDate()}</div>
-          </div>
-        </div>
-      </div>
+          <div className={styles.top_right_time}
+          style={{display: "flex", flexDirection: "column", alignItems: "flex-end", justifyContent: "flex-end", width: "auto", gap: "2px"}}
+          >
+              <span style={{fontSize: "13px", fontWeight: "bold", color: "black", fontFamily: "Ubuntu, Roboto, sans-serif", whiteSpace: "nowrap"}}>{time}</span>
+              <span style={{fontSize: "13px", fontWeight: "bold", color: "black", fontFamily: "Ubuntu, Roboto, sans-serif", whiteSpace: "nowrap"}}>{date}</span>
+         </div>
       
-      <div>
-        <button className={styles.button} onClick={() => {setFlag(true); alert("You got me boii check the command again")}}>Click me</button>
-      </div>
-      {Pressed && (
-        <div className={styles.terminal}>
-          <div className={styles.terminal_header}>
-            <div className={styles.terminal_controls}>
-              <div className={`${styles.terminal_button} ${styles.terminal_button_close}`} onClick={() => {setPressed(false);setTerminalHistory([])}}></div>
-              <div className={`${styles.terminal_button} ${styles.terminal_button_minimize}`}></div>
-              <div className={`${styles.terminal_button} ${styles.terminal_button_maximize}`}></div>
-            </div>
-            <span className={styles.terminal_title}>Kannan@Ubuntu-desktop:~</span>
-          </div>
-                                  
-            
-           
-            <div className={styles.terminal_history}>
-              {terminalHistory.map((entry, index) => (
-                <div key={index} className={styles.terminal_entry}>
-                  <Terminal/>
-                  <div className={styles.terminal_command}>
-                    <span className={styles.terminal_title1}>&#10551;&#10522;&#9763;&#10501;</span>
-                    <span style={{color: 'white', fontSize: '14px'}}>{entry.command}</span>
-                  </div>
-                  <div className={styles.terminal_output}>
-                    {entry.output.split('\n').map((line, lineIndex) => (
-                      <div key={lineIndex}>{line}</div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Input Area */}
-           <div>
-            <Terminal/>
-            <div className={styles.terminal_command} style={{display: 'inline-block'}}>
-             <span className={styles.terminal_title1}>&#10551;&#10522;&#9763;&#10501;</span>
-             </div>
-             <input 
-               type="text" 
-               onChange={handleInputChange} 
-               onKeyDown={handleKeyDown} 
-               className={styles.terminal_input} 
-               value={cmd}
-               placeholder="Type 'help' for commands..."
-               autoFocus
-             />
-           </div>
-          
-        </div>
-      )}
-    </div>
-  );
+         </span>
+       </div>
+       <div className={styles.navbar}>
+       <span onClick={() => setShowTerminal(true)} style={{ cursor: 'pointer' }}><img src="/terminal.svg" alt="logo" /></span>
+       <span onClick={() => setShowChrome(true)} style={{ cursor: 'pointer' }}><img src="/chrome.svg" alt="logo" /></span>
+       <span onClick={() => window.open("https://github.com/sanjaykannan8", "_blank")} style={{ cursor: 'pointer' }}><img src="/github.svg" alt="logo" /></span>
+       <span onClick={() => window.open("https://www.linkedin.com/in/kannan-in/", "_blank")} style={{ cursor: 'pointer' }}><img src="/linkedin.svg" alt="logo" /></span>
+       <span onClick={() => window.open("https://open.spotify.com/", "_blank")} style={{ cursor: 'pointer' }}><img src="/spotify.svg" alt="logo" /></span>
+       <span onClick={() => setShowNotepad(true)} style={{ cursor: 'pointer' }}><img src="/notepad.svg" alt="logo" /></span>
+       <span><img src="/vsc.svg" alt="logo" /></span>
+       <span><img src="/folder.svg" alt="logo" /></span>
+       <span><img src="/trash.svg" alt="logo" /></span>
+       </div>
+       {showTerminal && <Terminal isVisible={showTerminal} onClose={() => setShowTerminal(false)} />}
+       {showNotepad && <Notepad isVisible={showNotepad} onClose={() => setShowNotepad(false)} />}
+       {showChrome && <Chrome isVisible={showChrome} onClose={() => setShowChrome(false)} />}
+     </div>
+  )
 }

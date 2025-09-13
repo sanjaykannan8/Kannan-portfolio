@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <img className='bg' src="/portbg.jpg" alt="logo" />
+        <img className='bg' src="/bg-kannan.png" alt="logo" />
         {children}
       </body>
     </html>
